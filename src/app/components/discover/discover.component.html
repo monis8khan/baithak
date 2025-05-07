@@ -42,7 +42,8 @@
       <p *ngIf="filteredItems.length === 0">No items match your criteria.</p>
 
       <div *ngFor="let item of filteredItems" class="event-card">
-        <div class="event-content" >
+        <img [src]="item.imageUrl" alt="{{ item.title }}" class="event-image" />
+        <div class="event-content">
           <h3>{{ item.title }}</h3>
           <p><strong>Date:</strong> {{ item.date | date : "medium" }}</p>
           <p><strong>Location:</strong> {{ item.location }}</p>
@@ -55,6 +56,7 @@
           </div>
         </div>
       </div>
+      
     </div>
 
     <button
