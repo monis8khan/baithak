@@ -1,0 +1,10 @@
+<!-- Modal Overlay -->
+<div class="modal-overlay" (click)="close.emit()">
+  <!-- Modal Content -->
+  <div class="modal-content" (click)="$event.stopPropagation()"> <!-- Prevents closing when clicking inside modal -->
+    <h2>Booking: {{ item.title }}</h2>
+    <p>Location: {{ item.location }}</p>
+    <p>Price: Rs. {{ item.price }}</p>
+    <button (click)="close.emit()" class="modal-close-btn">Close</button>
+  </div>
+</div>

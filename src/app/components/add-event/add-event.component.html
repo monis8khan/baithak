@@ -1,0 +1,29 @@
+<section id="addEvent" class="section">
+    <div class="container">
+      <h2 class="section-title">Share Your Event or Workshop</h2>
+      <form class="add-event-form" (ngSubmit)="submitEvent()">
+        <div class="form-row">
+          <input [(ngModel)]="newEvent.title" name="title" placeholder="Title" required>
+          <input [(ngModel)]="newEvent.date" name="date" type="datetime-local" required>
+        </div>
+        <div class="form-row">
+          <input [(ngModel)]="newEvent.location" name="location" placeholder="Location" required>
+          <input [(ngModel)]="newEvent.category" name="category" placeholder="Category" required>
+        </div>
+        <textarea [(ngModel)]="newEvent.description" name="description" placeholder="Detailed Description" required></textarea>
+        <div class="form-row">
+          <input [(ngModel)]="newEvent.price" name="price" type="number" placeholder="Price (PKR)" min="0" required>
+          <input [(ngModel)]="newEvent.imageUrl" name="imageUrl" type="url" placeholder="Image URL (Optional)">
+        </div>
+        <div class="form-row">
+          <label>Type:</label>
+          <select [(ngModel)]="newEvent.type" name="type" required>
+            <option value="event">Event</option>
+            <option value="class">Class/Workshop</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit for Review</button>
+      </form>
+    </div>
+  </section>
+  

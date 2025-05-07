@@ -1,0 +1,86 @@
+.section {
+    padding: 4em 1em;
+    background-color: #fff;
+  }
+  
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    color: #a14c3a;
+    margin-bottom: 1em;
+  }
+  
+  .add-event-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+  }
+  
+  .form-row {
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+  }
+  
+  input, textarea, select {
+    flex: 1 1 100%;
+    padding: 0.9em;
+    font-size: 1rem;
+    border: 1.5px solid #d8c7be;
+    border-radius: 8px;
+    font-family: inherit;
+    box-sizing: border-box;
+    color: #5a4a42;
+    background-color: #fafafa;
+    transition: border-color 0.2s ease-in-out;
+  }
+  
+  input:focus, textarea:focus, select:focus {
+    border-color: #a14c3a;
+    outline: none;
+  }
+  
+  textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+  
+  label {
+    font-weight: 600;
+    color: #a14c3a;
+    margin-bottom: 0.5em;
+    display: inline-block;
+  }
+  
+  .btn-primary {
+    background-color: #e97c5c;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.8em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    width: 100%;
+  }
+  
+  .btn-primary:hover {
+    background-color: #d46749;
+  }
+  
+  @media (min-width: 600px) {
+    .form-row > * {
+      flex: 1 1 45%;
+    }
+  
+    textarea {
+      flex: 1 1 100%;
+    }
+  }
+  

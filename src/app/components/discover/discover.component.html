@@ -1,0 +1,83 @@
+<section id="discover" class="section">
+  <div class="container">
+    <h2 class="section-title">Discover What's On</h2>
+    <div class="toggle-group">
+      <button
+        (click)="toggleContent('events')"
+        [class.active]="showEvents"
+        class="toggle-btn"
+      >
+        Events
+      </button>
+      <button
+        (click)="toggleContent('classes')"
+        [class.active]="!showEvents"
+        class="toggle-btn"
+      >
+        Classes & Workshops
+      </button>
+    </div>
+    <div class="toolbar">
+      <div class="search-wrapper">
+        <i class="fas fa-search"></i>
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Search by title..."
+          [(ngModel)]="searchQuery"
+          (input)="searchItems(searchQuery)"
+        />
+      </div>
+      <select
+        id="categoryFilter"
+        class="filter-select"
+        [(ngModel)]="categoryFilter"
+        (change)="filterItems(categoryFilter)"
+      >
+        <option value="">All Categories</option>
+        <!-- You can dynamically populate options here -->
+      </select>
+    </div>
+    <div id="itemsContainer" class="events-grid">
+      <p *ngIf="filteredItems.length === 0">No items match your criteria.</p>
+
+      <div *ngFor="let item of filteredItems" class="event-card">
+        <div class="event-content" >
+          <h3>{{ item.title }}</h3>
+          <p><strong>Date:</strong> {{ item.date | date : "medium" }}</p>
+          <p><strong>Location:</strong> {{ item.location }}</p>
+          <p><strong>Category:</strong> {{ item.category }}</p>
+          <p><strong>Price:</strong> Rs. {{ item.price }}</p>
+          <p>{{ item.description }}</p>
+          <div class="card-actions">
+            <button class="btn btn-primary" (click)="openDetailModal(item)">View Details</button>
+            <button class="btn btn-secondary" (click)="openBookingModal(item)">Book Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button
+      (click)="loadMoreItems()"
+      id="loadMoreBtn"
+      class="btn btn-secondary load-more"
+      *ngIf="shouldShowLoadMore()"
+    >
+      Load More
+    </button>
+  </div>
+</section>
+
+
+<app-detail-modal
+  *ngIf="showDetailModal"
+  [item]="selectedItem"
+  (close)="closeModals()"
+  (book)="openBookingModal(selectedItem)">
+</app-detail-modal>
+
+<app-booking-modal
+  *ngIf="showBookingModal"
+  [item]="selectedItem"
+  (close)="closeModals()">
+</app-booking-modal>

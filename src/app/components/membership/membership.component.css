@@ -1,0 +1,14 @@
+.container {
+    background: transparent;
+    box-shadow: none;
+  }
+  
+  .section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    color: #a14c3a;
+    margin-bottom: 0.2em;
+  }
+  
+  /* More custom styles for the component */
+  
