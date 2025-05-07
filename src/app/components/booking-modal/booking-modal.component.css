@@ -1,0 +1,173 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow: auto;
+    padding: 2em;
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: 8px;
+    padding: 2em;
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh; /* limit height */
+    overflow-y: auto; /* allow scroll inside */
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+    margin-bottom: 0.5em;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em 1.5em;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.full-width {
+    grid-column: span 2;
+}
+
+.form-group label {
+    margin-bottom: 0.4em;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 0.6em;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.btn {
+    padding: 0.8em 1.5em;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: #e97c5c;
+    color: white;
+}
+
+.btn-secondary {
+    background: #f7d488;
+    color: #a14c3a;
+}
+
+.payment-options {
+    display: flex;
+    gap: 2em;
+    margin-top: 0.5em;
+}
+
+.payment-options label {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    font-weight: normal;
+}
+
+.form-row {
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+}
+
+.form-group.half-width {
+    flex: 1 1 48%;
+    display: flex;
+    flex-direction: column;
+}
+
+.align-bottom {
+    justify-content: flex-end;
+    display: flex;
+    flex-direction: column;
+}
+
+/* OTP and Verify Button Styling */
+.btn-otp,
+.btn-verify {
+    padding: 0.6em 1.2em;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-otp {
+    background-color: #f59e0b; /* amber */
+    color: white;
+    margin-left: 1em;
+}
+
+.btn-otp:hover {
+    background-color: #d97706;
+}
+
+.btn-verify {
+    background-color: #10b981; /* emerald */
+    color: white;
+    margin-left: 1em;
+}
+
+.btn-verify:hover {
+    background-color: #059669;
+}
+
+/* Add some spacing between the form fields */
+.form-group {
+    margin-bottom: 1em;
+}
+
+.form-group input,
+.form-group textarea {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Make sure the modal is scrollable when there is a lot of content */
+.modal-content {
+    overflow-y: auto;
+    max-height: 90vh; /* Adjust height */
+    padding-right: 16px; /* Ensure scrollbar doesn’t cover content */
+}
+
+.modal-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 2em;
+    height: 100%;
+    overflow: auto; /* Allow scrolling if content overflows */
+}
+
+.verified-msg {
+    font-size: 0.9em;
+    color: green;
+    margin-top: 0.5em;
+    font-weight: bold;
+}

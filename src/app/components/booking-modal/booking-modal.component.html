@@ -1,10 +1,176 @@
 <!-- Modal Overlay -->
 <div class="modal-overlay" (click)="close.emit()">
   <!-- Modal Content -->
-  <div class="modal-content" (click)="$event.stopPropagation()"> <!-- Prevents closing when clicking inside modal -->
+  <div class="modal-content" (click)="$event.stopPropagation()">
     <h2>Booking: {{ item.title }}</h2>
-    <p>Location: {{ item.location }}</p>
-    <p>Price: Rs. {{ item.price }}</p>
-    <button (click)="close.emit()" class="modal-close-btn">Close</button>
+    <p><strong>Location:</strong> {{ item.location }}</p>
+    <p><strong>Price:</strong> Rs. {{ item.price }}</p>
+
+    <form *ngIf="!showConfirmationModal"  (ngSubmit)="submitForm()" #bookingForm="ngForm">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            required
+            [(ngModel)]="form.name"
+            #name="ngModel"
+          />
+          <div *ngIf="name.invalid && name.touched" class="error">Name is required</div>
+        </div>
+    
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            [(ngModel)]="form.email"
+            #email="ngModel"
+          />
+          <div *ngIf="email.invalid && email.touched" class="error">Valid email is required</div>
+        </div>
+    
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            required
+            [(ngModel)]="form.phone"
+            #phone="ngModel"
+          />
+          <div *ngIf="phone.invalid && phone.touched" class="error">Phone number is required</div>
+        </div>
+    
+        <!-- <div class="form-group">
+          <label for="seats">Number of Seats</label>
+          <input
+            id="seats"
+            name="seats"
+            type="number"
+            min="1"
+            required
+            [(ngModel)]="form.seats"
+            #seats="ngModel"
+          />
+          <div *ngIf="seats.invalid && seats.touched" class="error">Number of seats is required</div>
+        </div> -->
+    
+        <div class="form-group full-width">
+          <label for="note">Note (optional)</label>
+          <textarea
+            id="note"
+            name="note"
+            rows="3"
+            [(ngModel)]="form.note"
+          ></textarea>
+        </div>
+      </div>
+    
+      <div class="form-group full-width">
+        <label>Payment Option</label>
+        <div class="payment-options">
+          <label>
+            <input
+              type="radio"
+              name="payment"
+              value="pay_on_site"
+              [(ngModel)]="form.payment"
+              required
+            />
+            Pay on Site
+          </label>
+    
+          <label>
+            <input
+              type="radio"
+              name="payment"
+              value="easypaisa"
+              [(ngModel)]="form.payment"
+              (change)="onPaymentChange()"
+            />
+            EasyPaisa
+          </label>
+        </div>
+      </div>
+    
+      <!-- EasyPaisa fields -->
+      <div *ngIf="form.payment === 'easypaisa'" class="easypaisa-fields">
+        <div class="form-row">
+          <div class="form-group half-width">
+            <label for="account">Easypaisa Account Number</label>
+            <input
+              id="account"
+              type="text"
+              [(ngModel)]="easypaisa.accountNumber"
+              name="account"
+              required
+              #account="ngModel"
+            />
+            <div *ngIf="account.invalid && account.touched" class="error">
+              Account number is required
+            </div>
+          </div>
+          <div class="form-group half-width align-bottom">
+            <button
+              class="btn-otp"
+              type="button"
+              (click)="generateOTP()"
+              [disabled]="!easypaisa.accountNumber"
+            >
+              Generate OTP
+            </button>
+          </div>
+        </div>
+    
+        <div class="form-row" *ngIf="otpSent">
+          <div class="form-group half-width">
+            <label for="otp">Enter OTP</label>
+            <input
+              id="otp"
+              type="text"
+              [(ngModel)]="easypaisa.otp"
+              name="otp"
+              #otp="ngModel"
+            />
+            <div *ngIf="otp.invalid && otp.touched" class="error">OTP is required</div>
+          </div>
+          <div class="form-group half-width align-bottom">
+            <button class="btn-verify" type="button" (click)="verifyOTP()">Verify</button>
+          </div>
+        </div>
+    
+        <p *ngIf="otpVerified" class="verified-msg">✅ OTP Verified</p>
+      </div>
+    
+      <div class="form-actions">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="
+            !bookingForm.form.valid ||
+            (form.payment === 'easypaisa' && !otpVerified)
+          "
+        >
+          Confirm Booking
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="close.emit()">
+          Cancel
+        </button>
+      </div>
+    </form>
+    
+
+    <div *ngIf="showConfirmationModal" class="confirmation-modal">
+      <h2>🎉 Booking Confirmed!</h2>
+      <p>Your Booking ID is:<code>{{ confirmationUUID }}</code></p>
+      <button class="btn" (click)="showConfirmationModal = false">Close</button>
+    </div>
   </div>
 </div>
+
